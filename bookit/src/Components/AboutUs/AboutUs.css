@@ -1,0 +1,32 @@
+.content {
+  overflow: hidden;
+}
+
+.header-text h1 {
+  display: flex;
+  font-size: 60px;
+  justify-content: center;
+}
+
+.Logout-button {
+  position: absolute;
+  top: 7%;
+  right: 5%;
+}
+
+.text-container {
+  margin: 0% 20%;
+}
+.box-1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.box-1 h3 {
+  font-size: 32px;
+}
+
+.box-header {
+  font-size: 24px;
+}

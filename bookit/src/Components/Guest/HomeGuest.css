@@ -1,0 +1,51 @@
+.content {
+  overflow: hidden;
+}
+.contentPageGuest {
+  height: 100vh;
+}
+.wallpaper {
+  background-position: center;
+  background-size: cover;
+  height: 92.8vh;
+  overflow: hidden;
+  z-index: -1;
+  margin-left: 13.2%;
+}
+
+.search-section {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+}
+.Logout-button {
+  position: absolute;
+  top: 7%;
+  right: 5%;
+}
+
+.findOut-Button {
+  position: absolute;
+  bottom: 20%;
+  left: 20%;
+  max-width: 300px;
+  height: 150px;
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: none;
+}
+
+.findOut-Button:hover {
+  cursor: pointer;
+}
+
+.link-AboutUs {
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+
+.link-AboutUs p {
+  opacity: 100%;
+}
