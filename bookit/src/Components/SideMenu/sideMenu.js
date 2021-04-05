@@ -11,40 +11,46 @@ import "./sideMenu.css";
 
 const SideMenu = () => {
   const copyRight = "Developed by CMV.";
+
   return (
     <div className="sideMenu-container">
       <div className="navBar">
         <ul className="menu-list">
           <li className="nav-links">
             <img className="icon" src={HomeIcon} alt="" />
-            <Link to="/homeguest" className="option">
+            <Link to="/homeadmin" className="option">
               {" "}
               Home
             </Link>
           </li>
           <li className="nav-links">
             <img className="icon" src={HootelRoomIcon} alt="" />
-            <a className="option" href="/homeguest">
+            <Link to="/hotelroomsadmin" className="option">
+              {" "}
               Hotel Rooms
-            </a>
+            </Link>
           </li>
           <li className="nav-links">
             <img className="icon" src={ReservationIcon} alt="" />
-            <a className="option" href="#">
+            <Link to="/reservationadmin" className="option">
+              {" "}
               Reservations
-            </a>
+            </Link>
           </li>
           <li className="nav-links">
             <img className="icon" src={AboutUsIcon} alt="" />
-            <a className="option" href="#">
+
+            <Link to="/aboutus" className="option">
+              {" "}
               About us
-            </a>
+            </Link>
           </li>
           <li className="nav-links">
             <img className="icon" src={ContactIcon} alt="" />
-            <a className="option" href="#">
+            <Link to="" className="option">
+              {" "}
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

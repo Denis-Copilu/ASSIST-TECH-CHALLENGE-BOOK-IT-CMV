@@ -6,13 +6,8 @@ import "./Toolbar.css";
 
 const Toolbar = (name) => {
   const Logo = "BookIT";
-console.log(name.name);
-  // const user = {
-  //   firstName: name.name,
-  //   lastName: "Mircel",
-  // };
+  console.log(name.name);
 
-  // const userFullName = `${user.firstName}  ${user.lastName}`;
   const userFullName = name.name;
 
   const notificationHandler = () => {
@@ -36,9 +31,7 @@ console.log(name.name);
               id="notificationIcon"
             />
           </div>
-          <div id="userName">
-           {userFullName}
-          </div>
+          <div id="userName">{userFullName}</div>
           <div>
             <img
               src={userIcon}

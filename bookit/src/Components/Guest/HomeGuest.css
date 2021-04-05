@@ -2,7 +2,7 @@
   overflow: hidden;
 }
 .contentPageGuest {
-  height: 100vh;
+  overflow: hidden;
 }
 .wallpaper {
   background-position: center;
@@ -10,7 +10,6 @@
   height: 92.8vh;
   overflow: hidden;
   z-index: -1;
-  margin-left: 13.2%;
 }
 
 .search-section {
