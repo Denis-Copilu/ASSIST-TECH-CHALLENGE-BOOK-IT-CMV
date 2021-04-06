@@ -47,7 +47,7 @@ const SideMenu = () => {
           </li>
           <li className="nav-links">
             <img className="icon" src={ContactIcon} alt="" />
-            <Link to="" className="option">
+            <Link to="/contactpage" className="option">
               {" "}
               Contact
             </Link>

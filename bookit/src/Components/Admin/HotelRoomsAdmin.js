@@ -7,7 +7,7 @@ import NavBar from "../SideMenu/sideMenu";
 import "./HotelRoomsAdmin.css";
 
 function HotelRoomAdmin(props) {
-  const url = "http://8b3eb56492b1.ngrok.io";
+  const url = "http://31a8d04bbc98.ngrok.io";
   const handleLogout = () => {
     removeUserSession();
     localStorage.removeItem("name");
@@ -16,15 +16,28 @@ function HotelRoomAdmin(props) {
   const { useState } = React;
 
   const [columns, setColumns] = useState([
-    { title: "RoomNumber", field: "id" },
+    { title: "RoomNumber", field: "id", editable: "never" },
     { title: "MaxCapacity", field: "maxCapacity" },
     { title: "Facilities", field: "facilities" },
-    { title: "Smoking", field: "smoking" },
-    { title: "PetFriendly", field: "petFriendly" },
+    {
+      title: "Smoking",
+      field: "smoking",
+      lookup: { false: "Not allowed", true: "Allowed" },
+    },
+    {
+      title: "PetFriendly",
+      field: "petFriendly",
+      lookup: { false: "Not allowed", true: "Allowed" },
+    },
     { title: "Rating", field: "rating", editable: "never" },
     { title: "NFCTag", field: "nfcTag" },
     { title: "Beds Number", field: "bedsNumber" },
-    { title: "Cleaned", field: "cleaned", editable: "never" },
+    {
+      title: "Cleaned",
+      field: "cleaned",
+      editable: "never",
+      lookup: { false: "Not Cleaned", true: "Cleaned" },
+    },
     { title: "Price", field: "price" },
   ]);
 
@@ -32,7 +45,7 @@ function HotelRoomAdmin(props) {
 
   useEffect(() => {
     axios
-      .get(url + "/rooms")
+      .get(url + "/room/list")
       .then((resp) => {
         setData(resp.data);
       })
@@ -40,7 +53,7 @@ function HotelRoomAdmin(props) {
   }, []);
 
   const addRow = (newData) => {
-    axios.post(url + "/addRoom", newData).then((resp) => {
+    axios.post(url + "/room/addRoom", newData).then((resp) => {
       // console.log("zzz", resp);
       setData([...data, newData]);
     });
@@ -48,10 +61,9 @@ function HotelRoomAdmin(props) {
 
   const deleteRow = (selectedRow, index) => {
     index = selectedRow.tableData.id;
-    // console.log("index", index);
-    // console.log("objlog", data[index].id);
+
     axios
-      .delete(`${url}/rooms/delete/${parseInt(data[index].id)}`)
+      .delete(`${url}/room/delete/${parseInt(data[index].id)}`)
       .then((resp) => {
         // console.log("deleteRow", resp);
         const dataDelete = [...data];
@@ -60,12 +72,15 @@ function HotelRoomAdmin(props) {
       });
   };
 
-  const editRow = (newData, oldData, index) => {
-    index = oldData.tableData.id;
+  const editRow = (newData, oldData) => {
+    const index = oldData.tableData.id;
+    newData.id = parseInt(newData.id);
+    newData.nfcTag = parseInt(newData.nfcTag);
+
     axios
-      .put(`${url}/rooms/update/${parseInt(data[index].id)}`)
+      .put(`${url}/room/update/${parseInt(data[index].id)}`, newData)
       .then((resp) => {
-        console.log(resp);
+        console.error(resp);
         const dataUpdate = [...data];
         dataUpdate[index] = newData;
         setData([...dataUpdate]);
@@ -87,8 +102,9 @@ function HotelRoomAdmin(props) {
           <MaterialTable
             style={{
               position: "fixed",
-              margin: "20px 20px 20px 40px",
-              height: "78vh",
+              margin: "20px 20px 20px 300px",
+              height: "80vh",
+              width: "70%",
             }}
             title="Rooms"
             columns={columns}
@@ -100,9 +116,9 @@ function HotelRoomAdmin(props) {
 
                   resolve();
                 }),
-              onRowUpdate: (newData, oldData, index) =>
+              onRowUpdate: (newData, oldData) =>
                 new Promise((resolve, reject) => {
-                  editRow(newData, oldData, index);
+                  editRow(newData, oldData);
                   resolve();
                 }),
               onRowDelete: (oldData, index) =>
@@ -112,6 +128,9 @@ function HotelRoomAdmin(props) {
                 }),
             }}
             options={{
+              paging: true,
+              pageSize: 11, // make initial page size
+              pageSizeOptions: [0],
               headerStyle: {
                 backgroundColor: "#1881c7",
                 color: "#fff",

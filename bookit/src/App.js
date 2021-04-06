@@ -9,6 +9,7 @@ import HomeGuest from "./Components/Guest/HomeGuest";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import ReservationAdmin from "./Components/Admin/ReservationAdmin";
 import HotelRoomsAdmin from "./Components/Admin/HotelRoomsAdmin";
+import ContactPage from "./Components/Contact/Contact";
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -48,6 +49,7 @@ function App() {
               <Route path="/aboutus" component={AboutUs} />
               <Route path="/reservationadmin" component={ReservationAdmin} />
               <Route path="/hotelroomsadmin" component={HotelRoomsAdmin} />
+              <Route path="/contactpage" component={ContactPage} />
             </Switch>
           </div>
         </div>
