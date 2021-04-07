@@ -1,16 +1,12 @@
 import React from "react";
-import { removeUserSession } from "../../Utils/Common";
 import ToolBar from "../NavBar/Toolbar";
 import NavBar from "../SideMenu/sideMenu";
 import "./AboutUs.css";
+import AboutUsPhoto from "../../Assets/AboutUsPhoto/aboutus.svg";
 
 function HomeCleaner(props) {
   // handle click event of logout button
-  const handleLogout = () => {
-    removeUserSession();
-    localStorage.removeItem("name");
-    props.history.push("/");
-  };
+
   return (
     <div className="contentPageGuest">
       <ToolBar name={localStorage.getItem("name")} />
@@ -18,36 +14,47 @@ function HomeCleaner(props) {
         <NavBar />
         <div className="content">
           <div className="text-container">
-            <div className="header-text">
-              <h1>About us</h1>
-            </div>
-
-            <input
-              type="button"
-              onClick={handleLogout}
-              value="Logout"
-              className="Logout-button"
-            />
             <div className="box-1">
               <div className="box-header">
-                <h3>Who are we?</h3>
+                <h3>What?</h3>
               </div>
               <div className="box-text">
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Fugiat voluptatum officia nobis, alias tenetur cum maiores
-                  facilis tempore sint reiciendis eligendi deleniti magnam
-                  excepturi exercitationem impedit perferendis aliquid rem quas?
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Corporis, sequi sed? Nostrum nihil quidem maxime magni quae,
-                  deleniti iste voluptate, obcaecati sed ea rem quis pariatur
-                  beatae reprehenderit consequatur id esse aliquam nesciunt
-                  dolorum, hic modi! At officia assumenda doloribus, maxime sit,
-                  aliquam totam sapiente magni natus velit temporibus error?
+                  We are providing a new way of booking by yourself using our
+                  new automatic system. It can be used solely with your phone,
+                  so we keep it simple without any much trouble, interaction
+                  with other people and paperwork.
                 </p>
               </div>
+              <div className="box-header">
+                <h3>How?</h3>
+              </div>
+              <div className="box-text">
+                <p>
+                  How are we doing it? Simple! By visiting our website you can
+                  make a reservation of a room. After that the only thing you
+                  need to do is to come and use your phone NFC to check-in and
+                  check-out. Moreover, you can also use your phone to unlock and
+                  lock your room, so no keys are needed.
+                </p>
+              </div>
+              <div className="box-header">
+                <h3>Why?</h3>
+              </div>
+              <div className="box-text">
+                <p>
+                  Our first motivation was this actual pandemic, whom afected us
+                  all. Moreover, we think this can evolve to a hybrid solution
+                  when things are going to get better. Do you want to use the
+                  classic check-in/ check-out? No problems! But if u want to
+                  keep it simple and to reduce the interaction with another
+                  people, we also have that option.
+                </p>
+              </div>
+            </div>
+            <div className="side-image">
+              {" "}
+              <img src={AboutUsPhoto} alt="" />
             </div>
           </div>
         </div>

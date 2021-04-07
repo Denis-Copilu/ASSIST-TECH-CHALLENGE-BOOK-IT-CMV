@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 //CSS
 import "./sideMenu.css";
 
-const SideMenu = () => {
+const SideMenuGuest = () => {
   const copyRight = "Developed by CMV.";
 
   return (
@@ -18,21 +18,21 @@ const SideMenu = () => {
         <ul className="menu-list">
           <li className="nav-links">
             <img className="icon" src={HomeIcon} alt="" />
-            <Link to="/homeadmin" className="option">
+            <Link to="/homeguest" className="option">
               {" "}
               Home
             </Link>
           </li>
           <li className="nav-links">
             <img className="icon" src={HootelRoomIcon} alt="" />
-            <Link to="/hotelroomsadmin" className="option">
+            <Link to="/hotelroomsguest" className="option">
               {" "}
               Hotel Rooms
             </Link>
           </li>
           <li className="nav-links">
             <img className="icon" src={ReservationIcon} alt="" />
-            <Link to="/reservationadmin" className="option">
+            <Link to="/reservationguest" className="option">
               {" "}
               Reservations
             </Link>
@@ -61,4 +61,4 @@ const SideMenu = () => {
   );
 };
 
-export default SideMenu;
+export default SideMenuGuest;

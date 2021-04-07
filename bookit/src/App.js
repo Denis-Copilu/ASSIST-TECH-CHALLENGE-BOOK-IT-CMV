@@ -7,9 +7,14 @@ import HomeAdmin from "./Components/Admin/HomeAdmin";
 import HomeCleaner from "./Components/Cleaner/HomeCleaner";
 import HomeGuest from "./Components/Guest/HomeGuest";
 import AboutUs from "./Components/AboutUs/AboutUs";
+import ReservationAdmin from "./Components/Admin/ReservationAdmin";
+import HotelRoomsAdmin from "./Components/Admin/HotelRoomsAdmin";
+import ContactPage from "./Components/Contact/Contact";
+import ReservationGuest from "./Components/Guest/ReservationGuest";
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
     const token = getToken();
@@ -37,13 +42,17 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div>
-          <div className="content">
+          <div className="appContent">
             <Switch>
               <Route exact path="/" component={Login} />
               <Route path="/homeadmin" component={HomeAdmin} />
               <Route path="/homeguest" component={HomeGuest} />
               <Route path="/homecleaner" component={HomeCleaner} />
               <Route path="/aboutus" component={AboutUs} />
+              <Route path="/reservationadmin" component={ReservationAdmin} />
+              <Route path="/hotelroomsadmin" component={HotelRoomsAdmin} />
+              <Route path="/contactpage" component={ContactPage} />
+              <Route path="/reservationguest" component={ReservationGuest} />
             </Switch>
           </div>
         </div>
