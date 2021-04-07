@@ -17,12 +17,6 @@ function HomeAdmin(props) {
         <NavBar />
         <div className="content">
           <h1>Content Admin Home Page.</h1>
-          <input
-            id="buttonLogOut"
-            type="button"
-            onClick={handleLogout}
-            value="Logout"
-          />
         </div>
       </div>
     </div>

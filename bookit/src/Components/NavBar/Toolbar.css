@@ -6,7 +6,6 @@
   box-shadow: 0 6px 2px -2px rgba(0, 0, 0, 0.2);
   z-index: 10;
   width: 100%;
-  overflow: hidden;
 }
 
 .logo {
@@ -51,4 +50,29 @@
   width: 35px;
   height: 30px;
   cursor: pointer;
+}
+
+.toggleProfile {
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 5%;
+  top: 90%;
+  width: 80px;
+  border-radius: 20px;
+}
+
+#buttonLogOut {
+  border-radius: 20px;
+  height: 30px;
+  font-size: 14px;
+  background-color: #3498db;
+  width: 80px;
+  color: #fff;
+  border: 0.5px solid #246d9e;
+}
+
+#buttonLogOut:hover {
+  background-color: #3e8fc5;
 }

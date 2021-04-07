@@ -15,21 +15,17 @@ import "./Contact.css";
 function ContactPage(props) {
   // handle click event of logout button
   const handleLogout = () => {
-    removeUserSession();
-    localStorage.removeItem("name");
-    props.history.push("/");
+    console.log(props);
+    // removeUserSession();
+    // localStorage.removeItem("name");
+    // props.history.push("/");
   };
   return (
     <div className="contentPageAdmin">
       <ToolBar name={localStorage.getItem("name")} />
       <div className="elementsHomePage">
         <NavBar />
-        <input
-          id="buttonLogOut"
-          type="button"
-          onClick={handleLogout}
-          value="Logout"
-        />
+
         <div className="content">
           <div className="box">
             <div className="page-header">

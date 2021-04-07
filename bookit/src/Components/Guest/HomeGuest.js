@@ -1,19 +1,11 @@
 import React from "react";
-import { removeUserSession } from "../../Utils/Common";
 import ToolBar from "../NavBar/Toolbar";
-import NavBar from "../SideMenu/sideMenu";
+import NavBar from "../SideMenu/sideMenuGuest";
 import "./HomeGuest.css";
 import GuestHomePagePhoto from "../../Assets/HomePageGuestPhoto/GuestHomePagePhoto.png";
-import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
 
-function HomeGuest(props) {
-  // handle click event of logout button
-  const handleLogout = () => {
-    removeUserSession();
-    localStorage.removeItem("name");
-    props.history.push("/");
-  };
+function HomeGuest() {
   return (
     <div className="contentPageGuest">
       <ToolBar name={localStorage.getItem("name")} />
@@ -26,13 +18,7 @@ function HomeGuest(props) {
               <div className="search-section">
                 <h1>Content SEARCH </h1>
               </div>
-              <input
-                id="buttonLogOut"
-                type="button"
-                onClick={handleLogout}
-                value="Logout"
-                className="Logout-button"
-              />
+
               <button className="findOut-Button" type="button">
                 <Link to="/aboutus" className="link-AboutUs">
                   {" "}

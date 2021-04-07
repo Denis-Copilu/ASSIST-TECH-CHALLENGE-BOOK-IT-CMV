@@ -1,18 +1,12 @@
 import React, { useEffect } from "react";
 import MaterialTable from "material-table";
 import axios from "axios";
-import { removeUserSession } from "../../Utils/Common";
 import ToolBar from "../NavBar/Toolbar";
 import NavBar from "../SideMenu/sideMenu";
-import "./HotelRoomsAdmin.css";
 
-function HotelRoomAdmin(props) {
-  const url = "http://31a8d04bbc98.ngrok.io";
-  const handleLogout = () => {
-    removeUserSession();
-    localStorage.removeItem("name");
-    props.history.push("/");
-  };
+function HotelRoomAdmin() {
+  const url = "https://145a43d17234.ngrok.io";
+
   const { useState } = React;
 
   const [columns, setColumns] = useState([
@@ -40,6 +34,19 @@ function HotelRoomAdmin(props) {
     },
     { title: "Price", field: "price" },
   ]);
+
+  const inputValidation = (input) => {
+    if (
+      isNaN(input.maxCapacity) ||
+      input.facilities != "string" ||
+      isNaN(input.nfcTag) ||
+      isNaN(input.price)
+    ) {
+      alert("Your input is invalid");
+    } else if (input.price < 50 || input.price > 5000) {
+      alert("Your inserted price should be higher than 50 and less than 5000");
+    }
+  };
 
   const [data, setData] = useState([]);
 
@@ -76,6 +83,7 @@ function HotelRoomAdmin(props) {
     const index = oldData.tableData.id;
     newData.id = parseInt(newData.id);
     newData.nfcTag = parseInt(newData.nfcTag);
+    inputValidation(newData);
 
     axios
       .put(`${url}/room/update/${parseInt(data[index].id)}`, newData)
@@ -92,19 +100,14 @@ function HotelRoomAdmin(props) {
       <ToolBar name={localStorage.getItem("name")} />
       <div className="elementsHomePage">
         <NavBar />
-        <input
-          id="buttonLogOut"
-          type="button"
-          onClick={handleLogout}
-          value="Logout"
-        />
+
         <div className="container-fluid">
           <MaterialTable
             style={{
-              position: "fixed",
+              position: "relative",
               margin: "20px 20px 20px 300px",
               height: "80vh",
-              width: "70%",
+              flexWrap: "wrap",
             }}
             title="Rooms"
             columns={columns}

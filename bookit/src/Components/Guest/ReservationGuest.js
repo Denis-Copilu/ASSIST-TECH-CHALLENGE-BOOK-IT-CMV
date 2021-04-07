@@ -2,17 +2,14 @@ import React, { useEffect } from "react";
 import MaterialTable from "material-table";
 import axios from "axios";
 import ToolBar from "../NavBar/Toolbar";
-import NavBar from "../SideMenu/sideMenu";
+import NavBar from "../SideMenu/sideMenuGuest";
 
-function ReservationsAdmin() {
+function ReservationsGuest() {
   const url = "https://145a43d17234.ngrok.io";
-
-  // handle click event of logout button
 
   const { useState } = React;
 
   const [columns, setColumns] = useState([
-    { title: "User Id", field: "userId", filtering: false },
     { title: "Start Date", field: "startDate" },
     { title: "End Date", field: "endDate" },
     {
@@ -34,21 +31,33 @@ function ReservationsAdmin() {
     { title: "Price", field: "price", filtering: false },
     { title: "Room Number", field: "roomNumber", filtering: false },
   ]);
-  // const getUser = () =>{
-  //   if(    axios.get(url+`/users/id/${data.userId}`===data.userId))
-
-  // }
 
   const [data, setData] = useState([]);
+  var id = localStorage.getItem("id");
 
   useEffect(() => {
+    id = parseInt(id);
     axios
-      .get(url + "/reservation/list")
+      .get(url + `/reservation/list/${id}`) //trebuie adaugat id dupa login
       .then((resp) => {
         setData(resp.data);
       })
       .catch((error) => console.error("123", error));
   }, []);
+
+  // const deleteRow = (selectedRow, index) => {
+  //   index = selectedRow.tableData.id;
+
+  //   axios
+  //     .delete(`${url}/room/delete/${parseInt(data[index].id)}`)
+  //     .then((resp) => {
+  //       // console.log("deleteRow", resp);
+  //       const dataDelete = [...data];
+  //       dataDelete.splice(index, 1);
+  //       setData([...dataDelete]);
+  //     });
+  // };
+
   return (
     <div className="contentPageAdmin">
       <ToolBar name={localStorage.getItem("name")} />
@@ -60,17 +69,23 @@ function ReservationsAdmin() {
             style={{
               position: "relative",
               margin: "20px 20px 20px 300px",
-              height: "79vh",
-              maxWidth: "100%",
+              height: "80vh",
+              flexWrap: "wrap",
             }}
-            title="Reservations"
+            title="Your Reservations"
             columns={columns}
             data={data}
+            editable={{
+              onRowDelete: (oldData, index) =>
+                new Promise((resolve, reject) => {
+                  //   deleteRow(oldData, index);
+                  resolve();
+                }),
+            }}
             options={{
               paging: true,
-              pageSize: 9, // make initial page size
+              pageSize: 11, // make initial page size
               pageSizeOptions: [0],
-              filtering: true,
               headerStyle: {
                 backgroundColor: "#1881c7",
                 color: "#fff",
@@ -83,4 +98,4 @@ function ReservationsAdmin() {
   );
 }
 
-export default ReservationsAdmin;
+export default ReservationsGuest;

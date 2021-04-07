@@ -1,5 +1,4 @@
 import React from "react";
-import { removeUserSession } from "../../Utils/Common";
 import ToolBar from "../NavBar/Toolbar";
 import NavBar from "../SideMenu/sideMenu";
 import "./AboutUs.css";
@@ -7,11 +6,7 @@ import AboutUsPhoto from "../../Assets/AboutUsPhoto/aboutus.svg";
 
 function HomeCleaner(props) {
   // handle click event of logout button
-  const handleLogout = () => {
-    removeUserSession();
-    localStorage.removeItem("name");
-    props.history.push("/");
-  };
+
   return (
     <div className="contentPageGuest">
       <ToolBar name={localStorage.getItem("name")} />
@@ -19,12 +14,6 @@ function HomeCleaner(props) {
         <NavBar />
         <div className="content">
           <div className="text-container">
-            <input
-              type="button"
-              onClick={handleLogout}
-              value="Logout"
-              className="Logout-button"
-            />
             <div className="box-1">
               <div className="box-header">
                 <h3>What?</h3>
