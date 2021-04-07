@@ -1,7 +1,7 @@
 import React from "react";
 import { removeUserSession } from "../../Utils/Common";
 import ToolBar from "../NavBar/Toolbar";
-import NavBar from "../SideMenu/sideMenu";
+import NavBar from "../SideMenu/sideMenuGuest";
 import "./HomeGuest.css";
 import CardList from "./Card";
 

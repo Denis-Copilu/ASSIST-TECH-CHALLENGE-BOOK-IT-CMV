@@ -1,6 +1,6 @@
 import React from "react";
 import ToolBar from "../NavBar/Toolbar";
-import NavBar from "../SideMenu/sideMenu";
+import NavBar from "../SideMenu/sideMenuGuest";
 import "./AboutUs.css";
 import AboutUsPhoto from "../../Assets/AboutUsPhoto/aboutus.svg";
 
