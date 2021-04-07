@@ -7,6 +7,7 @@ import HomeAdmin from "./Components/Admin/HomeAdmin";
 import HomeCleaner from "./Components/Cleaner/HomeCleaner";
 import HomeGuest from "./Components/Guest/HomeGuest";
 import AboutUs from "./Components/AboutUs/AboutUs";
+import HotelRoomsGuest from "./Components/Guest/HotelRoomsGuest";
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -18,7 +19,8 @@ function App() {
     }
 
     axios
-      .get(`http://localhost:4000/verifyToken?token=${token}`)
+      //.get(`http://localhost:4000/verifyToken?token=${token}`)
+       .get(`http://5cdc18449ea8.ngrok.io/verifyToken?token=${token}`)
       .then((response) => {
         setUserSession(response.data.token, response.data.user);
         setAuthLoading(false);
@@ -37,11 +39,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div>
-          <div className="content">
+          <div className="Appcontent">
             <Switch>
               <Route exact path="/" component={Login} />
               <Route path="/homeadmin" component={HomeAdmin} />
               <Route path="/homeguest" component={HomeGuest} />
+              <Route path="/hotelroomsguest" component={HotelRoomsGuest} />
               <Route path="/homecleaner" component={HomeCleaner} />
               <Route path="/aboutus" component={AboutUs} />
             </Switch>

@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import "./sideMenu.css";
 
 const SideMenu = () => {
+  const ok = 1;
+
   const copyRight = "Developed by CMV.";
   return (
     <div className="sideMenu-container">
@@ -17,22 +19,28 @@ const SideMenu = () => {
         <ul className="menu-list">
           <li className="nav-links">
             <img className="icon" src={HomeIcon} alt="" />
-            <Link to="/homeguest" className="option">
-              {" "}
-              Home
-            </Link>
+            {
+              <Link to="/homeguest" className="option">
+                {" "}
+                Home
+              </Link>
+            }
           </li>
           <li className="nav-links">
             <img className="icon" src={HootelRoomIcon} alt="" />
-            <a className="option" href="/homeguest">
-              Hotel Rooms
-            </a>
+            {
+              <Link to="/hotelroomsguest" className="option">
+                {" "}
+                Hotel Rooms
+              </Link>
+            }
           </li>
           <li className="nav-links">
             <img className="icon" src={ReservationIcon} alt="" />
-            <a className="option" href="#">
+            <Link to="/reservationguest" className="option">
+              {" "}
               Reservations
-            </a>
+            </Link>
           </li>
           <li className="nav-links">
             <img className="icon" src={AboutUsIcon} alt="" />

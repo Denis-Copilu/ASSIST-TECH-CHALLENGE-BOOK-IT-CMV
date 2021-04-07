@@ -25,6 +25,8 @@ function HomeGuest(props) {
             <div className="wallpaper-content">
               <div className="search-section">
                 <h1>Content SEARCH </h1>
+                {/*  */}
+                
               </div>
               <input
                 id="buttonLogOut"
