@@ -27,6 +27,14 @@ function HomeGuest(props) {
                 <h1>Content SEARCH </h1>
                 {/*  */}
               </div>
+              <div className="checkButtons">
+                <button className="check-Button" type="button">
+                  Check-In
+                </button>
+                <button className="check-Button" type="button">
+                  Check-Out
+                </button>
+              </div>
 
               <button className="findOut-Button" type="button">
                 <Link to="/aboutus" className="link-AboutUs">

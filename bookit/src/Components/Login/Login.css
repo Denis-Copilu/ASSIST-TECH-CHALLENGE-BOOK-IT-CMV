@@ -52,6 +52,10 @@ input:focus {
   cursor: pointer;
 }
 
+.btn:focus {
+  outline: none;
+}
+
 #wlc {
   padding-bottom: 45%;
   text-align: center;
@@ -71,4 +75,10 @@ input:focus {
 
 .SignUp:hover {
   color: #1773b1;
+}
+
+.form-control1 {
+  border: none;
+  border-bottom: 1px solid #5a5a5a;
+  outline: none;
 }

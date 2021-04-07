@@ -20,6 +20,26 @@
   right: 5%;
 }
 
+.checkButtons {
+  position: absolute;
+  display: flex;
+  top: 50%;
+  left: 45%;
+  height: 60px;
+}
+.check-Button {
+  width: 200px;
+  margin: 10px;
+  background-color: #1881c7;
+  color: #fff;
+  border: none;
+  outline: none;
+  box-shadow: 0 7px 2px -2px rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
 .findOut-Button {
   position: absolute;
   bottom: 20%;
@@ -29,6 +49,7 @@
   border-radius: 100px;
   background-color: rgba(0, 0, 0, 0.4);
   border: none;
+  outline: none;
 }
 
 .findOut-Button:hover {

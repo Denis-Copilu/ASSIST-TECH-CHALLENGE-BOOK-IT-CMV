@@ -1,7 +1,7 @@
 import React from "react";
 import { removeUserSession } from "../../Utils/Common";
 import ToolBar from "../NavBar/Toolbar";
-import NavBar from "../SideMenu/sideMenu";
+import NavBar from "../SideMenu/sideMenuGuest";
 import FacebookIcon from "../../Assets/ContactIcons/facebook-512.png";
 import InstagramIcon from "../../Assets/ContactIcons/instagramIcon.png";
 import TwitterIcon from "../../Assets/ContactIcons/twitterIcon.png";
