@@ -23,6 +23,9 @@ function ReservationsAdmin() {
         new: "New",
         "check-in": "Checked-in",
         "check-out": "Checked-out",
+        locked: "Checked-in",
+        unlocked: "Checked-in",
+        "auto check-out": "Auto Checked-out",
       },
     },
     {
