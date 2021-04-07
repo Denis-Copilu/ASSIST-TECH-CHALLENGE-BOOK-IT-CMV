@@ -11,6 +11,7 @@ import ReservationAdmin from "./Components/Admin/ReservationAdmin";
 import HotelRoomsAdmin from "./Components/Admin/HotelRoomsAdmin";
 import ContactPage from "./Components/Contact/Contact";
 import ReservationGuest from "./Components/Guest/ReservationGuest";
+import HotelRoomsGuest from "./Components/Guest/HotelRoomsGuest";
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -42,7 +43,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div>
-          <div className="appContent">
+          <div className="AppContent">
             <Switch>
               <Route exact path="/" component={Login} />
               <Route path="/homeadmin" component={HomeAdmin} />
@@ -53,6 +54,7 @@ function App() {
               <Route path="/hotelroomsadmin" component={HotelRoomsAdmin} />
               <Route path="/contactpage" component={ContactPage} />
               <Route path="/reservationguest" component={ReservationGuest} />
+              <Route path="/hotelroomsguest" component={HotelRoomsGuest} />
             </Switch>
           </div>
         </div>
