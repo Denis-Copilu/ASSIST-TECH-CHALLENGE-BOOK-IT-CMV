@@ -5,7 +5,7 @@ import ToolBar from "../NavBar/Toolbar";
 import NavBar from "../SideMenu/sideMenu";
 
 function ReservationsAdmin() {
-  const url = "https://23b3efc561d1.ngrok.io";
+  const url = "http://d322baaeac27.ngrok.io";
 
   // handle click event of logout button
 

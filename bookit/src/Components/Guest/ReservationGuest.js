@@ -1,11 +1,28 @@
 import React, { useEffect } from "react";
-import MaterialTable from "material-table";
+import MaterialTable, { MTableToolbar } from "material-table";
 import axios from "axios";
 import ToolBar from "../NavBar/Toolbar";
 import NavBar from "../SideMenu/sideMenuGuest";
+import {
+  useTheme,
+  createMuiTheme,
+  MuiThemeProvider,
+} from "@material-ui/core/styles";
+
+import "./ReservationGuest.css";
 
 function ReservationsGuest() {
-  const url = "https://23b3efc561d1.ngrok.io";
+  const url = "http://d322baaeac27.ngrok.io";
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "#4caf50",
+      },
+      secondary: {
+        main: "rgb(177, 224, 255)",
+      },
+    },
+  });
 
   const { useState } = React;
 
@@ -33,30 +50,57 @@ function ReservationsGuest() {
   ]);
 
   const [data, setData] = useState([]);
-  var id = localStorage.getItem("id");
+  var idUser = localStorage.getItem("id");
 
   useEffect(() => {
-    id = parseInt(id);
+    idUser = parseInt(idUser);
     axios
-      .get(url + `/reservation/list/${id}`) //trebuie adaugat id dupa login
+      .get(url + `/reservation/list/${idUser}`) //trebuie adaugat id dupa login
       .then((resp) => {
         setData(resp.data);
       })
       .catch((error) => console.error("123", error));
   }, []);
 
-  // const deleteRow = (selectedRow, index) => {
-  //   index = selectedRow.tableData.id;
+  const handleCheckIn = (data) => {
+    for (let value of data) {
+      let idReservation = parseInt(value.id);
+      axios
+        .put(url + `/reservation/checkin/${idReservation}`)
+        .then((resp) => {
+          alert("You have been checked-in!");
+        })
+        .catch((error) =>
+          alert(
+            "You're check-in operation failed, try again when the date is valid!"
+          )
+        );
+    }
+  };
 
-  //   axios
-  //     .delete(`${url}/room/delete/${parseInt(data[index].id)}`)
-  //     .then((resp) => {
-  //       // console.log("deleteRow", resp);
-  //       const dataDelete = [...data];
-  //       dataDelete.splice(index, 1);
-  //       setData([...dataDelete]);
-  //     });
-  // };
+  const handleCheckOut = (data) => {
+    for (let value of data) {
+      let idReservation = parseInt(value.id);
+      axios
+        .put(url + `/reservation/checkout/${idReservation}`)
+        .then((resp) => {
+          alert("You have been checked-out!");
+        })
+        .catch((error) => alert("You're check-out operation failed!"));
+    }
+  };
+
+  const cancelReservation = (data) => {
+    for (let value of data) {
+      let idReservation = parseInt(value.id);
+      axios
+        .put(url + `/reservation/cancel/${idReservation}`)
+        .then((resp) => {
+          alert("You're reservation have been canceled!");
+        })
+        .catch((error) => alert("You're cancel reservation operation failed!"));
+    }
+  };
 
   return (
     <div className="contentPageAdmin">
@@ -65,33 +109,52 @@ function ReservationsGuest() {
         <NavBar />
 
         <div className="container-fluid">
-          <MaterialTable
-            style={{
-              position: "relative",
-              margin: "20px 20px 20px 300px",
-              height: "80vh",
-              flexWrap: "wrap",
-            }}
-            title="Your Reservations"
-            columns={columns}
-            data={data}
-            editable={{
-              onRowDelete: (oldData, index) =>
-                new Promise((resolve, reject) => {
-                  //   deleteRow(oldData, index);
-                  resolve();
-                }),
-            }}
-            options={{
-              paging: true,
-              pageSize: 11, // make initial page size
-              pageSizeOptions: [0],
-              headerStyle: {
-                backgroundColor: "#1881c7",
-                color: "#fff",
-              },
-            }}
-          />
+          <MuiThemeProvider theme={theme}>
+            <MaterialTable
+              style={{
+                position: "relative",
+                margin: "20px 20px 20px 300px",
+                height: "80vh",
+                flexWrap: "wrap",
+              }}
+              title="Your Reservations"
+              columns={columns}
+              data={data}
+              options={{
+                showTextRowsSelected: false,
+                selection: true,
+                paging: true,
+                pageSize: 11, // make initial page size
+                pageSizeOptions: [0],
+                headerStyle: {
+                  backgroundColor: "#1881c7",
+                  color: "#fff",
+                },
+                toolbar: {
+                  color: "#fff",
+                  backgroundColor: "black",
+                },
+              }}
+              actions={[
+                {
+                  tooltip: "Check-in",
+                  icon: () => <button className="check">Check In</button>,
+                  onClick: (evt, data) => handleCheckIn(data),
+                },
+                {
+                  tooltip: "Check-out",
+                  icon: () => <button className="check">Check Out</button>,
+
+                  onClick: (evt, data) => handleCheckOut(data),
+                },
+                {
+                  tooltip: "Cancel reservation",
+                  icon: () => <button className="check">Cancel</button>,
+                  onClick: (evt, data) => cancelReservation(data),
+                },
+              ]}
+            />
+          </MuiThemeProvider>
         </div>
       </div>
     </div>

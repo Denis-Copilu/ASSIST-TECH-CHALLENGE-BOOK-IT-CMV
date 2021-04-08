@@ -16,7 +16,7 @@ function Login(props) {
     setError(null);
 
     axios
-      .post("https://23b3efc561d1.ngrok.io/authenticate", {
+      .post("http://d322baaeac27.ngrok.io/authenticate", {
         email: username.value,
         password: password.value,
       })
@@ -34,7 +34,6 @@ function Login(props) {
         if (response.data.user.roleId == 2) {
           localStorage.setItem("name", response.data.user.name);
           localStorage.setItem("id", response.data.user.id);
-          console.log("ABC", localStorage.getItem("id"));
 
           props.history.push("/homeguest");
         }

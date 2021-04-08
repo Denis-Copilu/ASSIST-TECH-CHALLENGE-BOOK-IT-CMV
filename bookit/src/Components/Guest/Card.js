@@ -123,7 +123,7 @@ const Main = () => {
   const currentPost = searchedRooms.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [filterOption, setFilterOption] = React.useState("");
-  const URLRooms = "https://23b3efc561d1.ngrok.io/room/list";
+  const URLRooms = "http://d322baaeac27.ngrok.io/room/list";
   const [roomRezerve, setRoomRezerve] = React.useState([]);
   const [showDetailsRoom, setShowDetailsRoom] = React.useState(false);
   const [startDate, setStartDate] = React.useState(new Date());
