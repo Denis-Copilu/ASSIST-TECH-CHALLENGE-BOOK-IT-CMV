@@ -10,110 +10,10 @@ import Box from "@material-ui/core/Box";
 import { Modal, Button } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-//Temporarily store data here
 
 // Start App
 
 const Main = () => {
-  // constructor() {
-  //     super();
-
-  //     this.state = {
-  //         posts: {}
-  //     }
-  // }
-  // componentWillMount() {
-  //     this.setState({
-  //         posts: PostsData
-  //     });
-  // // }
-  // {id}<br />
-  //                             {price}<br />
-  //                             {bedsNumber}<br />
-  //                             {maxCapacity}<br />
-  //                             {facilities}<br />
-  //                             {smoking}<br />
-  //                             {petFriendly}
-  const PostsData = [
-    {
-      id: "1",
-      price: "70",
-      bedsNumber: "1",
-      smoking: false,
-      facilities: "Premium+TV",
-      maxCapacity: "4",
-      petFriendly: true,
-      rating: "2",
-      text:
-        "Loved because of it’s ocean view, this room is a perfect choice for a couple who wants to spend some quality time during night.",
-      image: Image_rooms,
-    },
-    {
-      id: "2",
-      price: "50",
-      bedsNumber: "1",
-      smoking: false,
-      facilities: "Premium",
-      maxCapacity: "5",
-      petFriendly: true,
-      rating: "3",
-      text:
-        "Loved because of it’s ocean view, this room is a perfect choice for a couple who wants to spend some quality time during night.",
-      image: Image_rooms,
-    },
-    {
-      id: "3",
-      price: "70",
-      bedsNumber: "1",
-      smoking: false,
-      facilities: "Premium",
-      maxCapacity: "2",
-      petFriendly: false,
-      rating: "5",
-      text:
-        "Loved because of it’s ocean view, this room is a perfect choice for a couple who wants to spend some quality time during night.",
-      image: Image_rooms,
-    },
-    {
-      id: "4",
-      price: "100",
-      bedsNumber: "1",
-      smoking: false,
-      facilities: "Premium",
-      maxCapacity: "5",
-      petFriendly: true,
-      rating: "5",
-      text:
-        "Loved because of it’s ocean view, this room is a perfect choice for a couple who wants to spend some quality time during night.",
-      image: Image_rooms,
-    },
-    {
-      id: "5",
-      price: "200",
-      bedsNumber: "1",
-      smoking: false,
-      facilities: "Premium",
-      maxCapacity: "5",
-      petFriendly: true,
-      rating: "2",
-      text:
-        "Loved because of it’s ocean view, this room is a perfect choice for a couple who wants to spend some quality time during night.",
-      image: Image_rooms,
-    },
-    {
-      id: "6",
-      price: "500",
-      bedsNumber: "5",
-      smoking: true,
-      facilities: "Premium",
-      maxCapacity: "5",
-      petFriendly: false,
-      rating: "3",
-      text:
-        "Loved because of it’s ocean view, this room is a perfect choice for a couple who wants to spend some quality time during night.",
-      image: Image_rooms,
-    },
-  ];
   const [rooms, setRooms] = React.useState([]);
   const [searchedRooms, setSearchedRooms] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -123,18 +23,57 @@ const Main = () => {
   const currentPost = searchedRooms.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [filterOption, setFilterOption] = React.useState("");
-  const URLRooms = "http://d322baaeac27.ngrok.io/room/list";
-  const [roomRezerve, setRoomRezerve] = React.useState([]);
+  const [roomReserve, setRoomReserve] = React.useState([]);
   const [showDetailsRoom, setShowDetailsRoom] = React.useState(false);
+  const [showConfirmReservation, setShowConfirmReservation] = React.useState(
+    false
+  );
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
+  const [error, setError] = React.useState("");
+  const URL = "http://9d5237c1421d.ngrok.io";
+  const URLRooms = URL + "/room/list";
+
   const handleCloseDetailsRoom = () => {
     setShowDetailsRoom(false);
+  };
+  const handleCloseConfirmReservation = () => {
+    setShowConfirmReservation(false);
+  };
+  const addReservation = (idRoom) => {
+    console.log(
+      startDate.toISOString().substring(0, 10) +
+        " " +
+        endDate.toISOString().substring(0, 10) +
+        " " +
+        localStorage.getItem("id") +
+        " rID" +
+        idRoom
+    );
+    axios
+      .post(URL + "/reservation/addReservation", {
+        startDate: startDate.toISOString().substring(0, 10),
+        endDate: endDate.toISOString().substring(0, 10),
+        userId: localStorage.getItem("id"),
+        roomNumber: idRoom,
+      })
+      .then((response) => {
+        console.log(response);
+        setError("");
+        handleCloseDetailsRoom();
+        setShowConfirmReservation(true);
+      })
+      .catch((error) => {
+        // console.log("A apărut o problemă."+error);
+        if (error.response.status === 400)
+          setError("The room is not available in between these days.");
+        else setError("Something went wrong. Please try again later.");
+      });
   };
   const handleShowDetailsRoom = (room = {}) => {
     setShowDetailsRoom(true);
     console.log(room);
-    setRoomRezerve(room);
+    setRoomReserve(room);
   };
 
   React.useEffect(() => {
@@ -207,7 +146,7 @@ const Main = () => {
               className="form-control"
               id="search"
               type="text"
-              placeholder="Search"
+              placeholder="Search..."
               onChange={(e) => {
                 search(e);
               }}
@@ -297,46 +236,89 @@ const Main = () => {
           <Modal.Body>
             <div className="card-body-details">
               <img src={Image_rooms1} />
+              <p id="error">{error}</p>
               <div className="card-header-details">
                 <div className="details-room-details">
-                  Room number: {roomRezerve.id}
+                  Room number: {roomReserve.id}
                   <br />
-                  Price: {roomRezerve.price}€/night
+                  Price: {roomReserve.price}€/night
                   <br />
-                  Beds number: {roomRezerve.bedsNumber}
+                  Beds number: {roomReserve.bedsNumber}
                   <br />
-                  Max Capacity: {roomRezerve.maxCapacity}
+                  Max Capacity: {roomReserve.maxCapacity}
                   <br />
-                  Facilities: {roomRezerve.facilities}
+                  Facilities: {roomReserve.facilities}
                   <br />
                   Smoking:{" "}
-                  {replaceText(roomRezerve.smoking, "Not allowed", "Allowed")}
+                  {replaceText(roomReserve.smoking, "Not allowed", "Allowed")}
                   <br />
                   Pet friendly:{" "}
-                  {replaceText(roomRezerve.petFriendly, "No", "Yes")}
+                  {replaceText(roomReserve.petFriendly, "No", "Yes")}
                 </div>
 
                 <div className="right-cont">
                   <div className="dtPicker">
+                    <p>Check-In</p>
                     <DatePicker
                       selected={startDate}
-                      onChange={(date) => setStartDate(date)}
+                      onChange={(date) => {
+                        setStartDate(date);
+                        console.log(date.toISOString().substring(0, 10));
+                      }}
                     />
                   </div>
-                  <DatePicker
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
-                  />
-                  <Button
-                    id="btnRezerve"
-                    variant="secondary"
-                    onClick={handleCloseDetailsRoom}
-                  >
-                    Rezerve
-                  </Button>
+                  <div className="dtPicker">
+                    <p>Check-Out</p>
+                    <DatePicker
+                      selected={endDate}
+                      onChange={(date) => setEndDate(date)}
+                    />
+                  </div>
+                  <div className="buttonsModal">
+                    <Button
+                      id="btnRezerve"
+                      variant="secondary"
+                      onClick={() => {
+                        addReservation(roomReserve.id);
+                      }}
+                    >
+                      RESERVE
+                    </Button>
+                    <Button
+                      id="btnRezerve"
+                      variant="secondary"
+                      onClick={() => {
+                        handleCloseDetailsRoom();
+                        setError("");
+                      }}
+                    >
+                      CLOSE
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
+          </Modal.Body>
+        </Modal>
+        {/* ************************* MODAL CONFIRM CREATE RESERVATION ****************************/}
+        <Modal
+          className="Modal"
+          show={showConfirmReservation}
+          onHide={handleCloseConfirmReservation}
+          animation={false}
+        >
+          <Modal.Body>
+            <div>The reservation was made successfully.</div>
+            <Button
+              id="btnClose"
+              variant="secondary"
+              onClick={() => {
+                handleCloseConfirmReservation();
+                setError("");
+              }}
+            >
+              Ok
+            </Button>
           </Modal.Body>
         </Modal>
       </div>
@@ -374,7 +356,8 @@ class CardHeader extends React.Component {
             <br />
             {maxCapacity}
             <br />
-            {facilities}
+            {facilities.substring(0, 18)}
+            {facilities.length > 18 ? "..." : ""}
             <br />
             {smoking}
             <br />

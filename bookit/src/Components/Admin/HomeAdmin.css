@@ -1,3 +1,35 @@
 .elementsHomePage {
   overflow: hidden;
 }
+
+.wallpaper-admin {
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  height: 92.8vh;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.buttonGuests {
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  height: 7%;
+  width: 10%;
+  cursor: pointer;
+  background-color: white;
+}
+
+.buttonGuests:hover {
+  background-color: rgb(230, 230, 230);
+}
+.link-guests {
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
