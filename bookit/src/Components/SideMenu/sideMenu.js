@@ -37,21 +37,6 @@ const SideMenu = () => {
               Reservations
             </Link>
           </li>
-          <li className="nav-links">
-            <img className="icon" src={AboutUsIcon} alt="" />
-
-            <Link to="/aboutus" className="option">
-              {" "}
-              About us
-            </Link>
-          </li>
-          <li className="nav-links">
-            <img className="icon" src={ContactIcon} alt="" />
-            <Link to="/contactpage" className="option">
-              {" "}
-              Contact
-            </Link>
-          </li>
         </ul>
       </div>
       <div className="copyRight">

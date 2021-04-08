@@ -12,7 +12,7 @@ import {
 import "./ReservationGuest.css";
 
 function ReservationsGuest() {
-  const url = "http://6eb4af46c242.ngrok.io";
+  const url = "http://d322baaeac27.ngrok.io";
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -65,34 +65,41 @@ function ReservationsGuest() {
   const handleCheckIn = (data) => {
     for (let value of data) {
       let idReservation = parseInt(value.id);
-      console.log(idReservation);
-      axios.put(url + `/reservation/checkin/${idReservation}`);
+      axios
+        .put(url + `/reservation/checkin/${idReservation}`)
+        .then((resp) => {
+          alert("You have been checked-in!");
+        })
+        .catch((error) =>
+          alert(
+            "You're check-in operation failed, try again when the date is valid!"
+          )
+        );
     }
   };
 
   const handleCheckOut = (data) => {
     for (let value of data) {
       let idReservation = parseInt(value.id);
-      console.log(idReservation);
-      axios.put(url + `/reservation/checkout/${idReservation}`);
+      axios
+        .put(url + `/reservation/checkout/${idReservation}`)
+        .then((resp) => {
+          alert("You have been checked-out!");
+        })
+        .catch((error) => alert("You're check-out operation failed!"));
     }
   };
 
-  const deleteRow = (selectedRow, index) => {
-    index = selectedRow.tableData.id;
-
-    axios
-      .delete(`${url}/room/delete/${parseInt(data[index].id)}`)
-      .then((resp) => {
-        // console.log("deleteRow", resp);
-        const dataDelete = [...data];
-        dataDelete.splice(index, 1);
-        setData([...dataDelete]);
-      });
-  };
-
-  const renderButton = () => {
-    return <button>checkIn</button>;
+  const cancelReservation = (data) => {
+    for (let value of data) {
+      let idReservation = parseInt(value.id);
+      axios
+        .put(url + `/reservation/cancel/${idReservation}`)
+        .then((resp) => {
+          alert("You're reservation have been canceled!");
+        })
+        .catch((error) => alert("You're cancel reservation operation failed!"));
+    }
   };
 
   return (
@@ -113,14 +120,8 @@ function ReservationsGuest() {
               title="Your Reservations"
               columns={columns}
               data={data}
-              editable={{
-                onRowDelete: (oldData, index) =>
-                  new Promise((resolve, reject) => {
-                    //   deleteRow(oldData, index);
-                    resolve();
-                  }),
-              }}
               options={{
+                showTextRowsSelected: false,
                 selection: true,
                 paging: true,
                 pageSize: 11, // make initial page size
@@ -145,6 +146,11 @@ function ReservationsGuest() {
                   icon: () => <button className="check">Check Out</button>,
 
                   onClick: (evt, data) => handleCheckOut(data),
+                },
+                {
+                  tooltip: "Cancel reservation",
+                  icon: () => <button className="check">Cancel</button>,
+                  onClick: (evt, data) => cancelReservation(data),
                 },
               ]}
             />

@@ -5,7 +5,7 @@ import ToolBar from "../NavBar/Toolbar";
 import NavBar from "../SideMenu/sideMenu";
 
 function HotelRoomAdmin() {
-  const url = "http://c9a5fecacaa2.ngrok.io";
+  const url = "http://d322baaeac27.ngrok.io";
 
   const { useState } = React;
 
@@ -25,7 +25,11 @@ function HotelRoomAdmin() {
     },
     { title: "Rating", field: "rating", editable: "never" },
     { title: "NFCTag", field: "nfcTag" },
-    { title: "Beds Number", field: "bedsNumber" },
+    {
+      title: "Room type",
+      field: "bedsNumber",
+      lookup: { 1: "Single", 2: "Double", 3: "Triple", 4: "King Size" },
+    },
     {
       title: "Cleaned",
       field: "cleaned",
@@ -35,16 +39,29 @@ function HotelRoomAdmin() {
     { title: "Price", field: "price" },
   ]);
 
-  const inputValidation = (input) => {
-    if (
+  const editValidation = (input, oldData) => {
+    if (input.nfcTag === oldData.nfcTag) {
+      alert("The NFC tag needs to be different from the existing one");
+    } else if (
       isNaN(input.maxCapacity) ||
-      input.facilities != "string" ||
       isNaN(input.nfcTag) ||
       isNaN(input.price)
     ) {
-      alert("Your input is invalid");
+      alert("Your input type is invalid");
     } else if (input.price < 50 || input.price > 5000) {
       alert("Your inserted price should be higher than 50 and less than 5000");
+    } else if (input.maxCapacity > 6) {
+      alert("Due to pandemic condition, room can hold maximum 6 persons.");
+    }
+  };
+
+  const addValidation = (input) => {
+    if (isNaN(input.maxCapacity) || isNaN(input.nfcTag) || isNaN(input.price)) {
+      alert("Your input type is invalid!");
+    } else if (input.price < 50 || input.price > 5000) {
+      alert("Your inserted price should be higher than 50 and less than 5000");
+    } else if (input.maxCapacity > 6) {
+      alert("Due to pandemic condition, room can hold maximum 6 persons.");
     }
   };
 
@@ -60,10 +77,13 @@ function HotelRoomAdmin() {
   }, []);
 
   const addRow = (newData) => {
-    axios.post(url + "/room/addRoom", newData).then((resp) => {
-      // console.log("zzz", resp);
-      setData([...data, newData]);
-    });
+    addValidation(newData);
+    axios
+      .post(url + "/room/addRoom", newData)
+      .then((resp) => {
+        setData([...data, newData]);
+      })
+      .catch((error) => console.log(error));
   };
 
   const deleteRow = (selectedRow, index) => {
@@ -83,7 +103,7 @@ function HotelRoomAdmin() {
     const index = oldData.tableData.id;
     newData.id = parseInt(newData.id);
     newData.nfcTag = parseInt(newData.nfcTag);
-    inputValidation(newData);
+    editValidation(newData, oldData);
 
     axios
       .put(`${url}/room/update/${parseInt(data[index].id)}`, newData)
@@ -132,7 +152,7 @@ function HotelRoomAdmin() {
             }}
             options={{
               paging: true,
-              pageSize: 11, // make initial page size
+              pageSize: 7, // make initial page size
               pageSizeOptions: [0],
               headerStyle: {
                 backgroundColor: "#1881c7",
