@@ -12,10 +12,10 @@ import HotelRoomsAdmin from "./Components/Admin/HotelRoomsAdmin";
 import ContactPage from "./Components/Contact/Contact";
 import ReservationGuest from "./Components/Guest/ReservationGuest";
 import HotelRoomsGuest from "./Components/Guest/HotelRoomsGuest";
+import AllGuests from "./Components/Admin/AllGuests";
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
-  const [show, setShow] = useState(true);
 
   useEffect(() => {
     const token = getToken();
@@ -55,6 +55,7 @@ function App() {
               <Route path="/contactpage" component={ContactPage} />
               <Route path="/reservationguest" component={ReservationGuest} />
               <Route path="/hotelroomsguest" component={HotelRoomsGuest} />
+              <Route path="/seeallguests" component={AllGuests} />
             </Switch>
           </div>
         </div>

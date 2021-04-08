@@ -1,72 +1,95 @@
 .app-card-list {
-display:flex;
-justify-content: center;
-flex-wrap: wrap;
-min-height: 75vh;
-white-space:normal;
-margin-top:-70px;
-
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 75vh;
+  white-space: normal;
 }
-.card-body {  
+.card-body {
   width: 100%;
   margin: 10% 2%;
   white-space: normal;
-  font-size: 10px;
   text-align: center;
-  border: 1px solid gray;
-  
+  border: none;
+  transition: 0.3s;
+  box-shadow: 0px 6px 10px 2px rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  border-radius: 10px;
+  min-height: 250px;
+  min-width: 300px;
 }
-.card-body-details{
+.card-body:hover {
+  /* background-color: #b90202; */
+  background-color: #3498db;
+  color: #fff;
+}
+.card-body-details {
   font-size: 15px;
 }
-.card-header{
-display: inline-flex;
-font-size: 11px;
-padding: 1px;
-
+.card-header {
+  display: inline-flex;
+  font-size: 11px;
+  padding: 1px;
+  /* width: 50%; */
 }
-.form-control{
-margin-left: 2%;
-margin-top: 8%;
-
-width: 20%;
-
+.buttonsModal {
+  margin: 10%;
+  display: inline-flex;
 }
-.details-room{
+.form-control {
+  margin-left: 2%;
+  margin-top: 8%;
+  border: 1px solid grey;
+  border-radius: 30px;
+  max-width: 15%;
+  min-width: 7%;
+  height: 30px;
+  padding-left: 15px;
+  font-size: 15px;
+}
+.details-room {
   padding-top: 8%;
   padding-left: 10px;
   text-align: left;
+  width: 50%;
+  font-size: 12px;
 }
-.filter-option{
-margin-left: 2%;
+.filter-option {
+  margin-left: 2%;
+  font-size: 12px;
 }
-.element-filter{
+.element-filter {
   display: inline-flex;
-  border: 1px solid gray;
-  margin: 1px;
-  background-color: #F6F6F6;
+  border: none;
+  margin-top: 1%;
+  background-color: #fff;
 }
-#content-filter{
-  width: 100%; 
+#content-filter {
+  width: 100%;
 }
-.pagination{
+.pagination {
   display: flex;
   justify-content: center;
   padding-top: 1%;
 }
-.crd{
-  padding: 5%;
+.pagination:hover {
+  background-color: #fff;
 }
-.dtPicker{
- 
-}
-.right-cont{
-  padding: 5%;
-}
-.card-header-details{
-display: inline-flex;
+.crd {
+  margin: 5%;
 }
 
+.dtPicker {
+}
+.right-cont {
+  padding-left: 5%;
+}
+.card-header-details {
+  display: inline-flex;
+}
+#error {
+  color: red;
+}
 .Modal {
   position: absolute;
   top: 50%;
@@ -75,9 +98,9 @@ display: inline-flex;
   padding: 2em;
   min-width: 20em;
   max-width: 70%;
-  background-color: #fff;
+  background-color: #abd4f0;
   border-radius: 1em;
   transform: translate(-50%, -50%);
   outline: transparent;
-  box-shadow: 0 6px 2px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 6px 2px -2px rgba(0, 0, 0, 0.2);
 }
