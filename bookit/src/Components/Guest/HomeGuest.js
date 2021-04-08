@@ -6,14 +6,18 @@ import "./HomeGuest.css";
 import GuestHomePagePhoto from "../../Assets/HomePageGuestPhoto/GuestHomePagePhoto.png";
 import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function HomeGuest(props) {
+  const url = "http://77113eef5af1.ngrok.io";
   // handle click event of logout button
   const handleLogout = () => {
     removeUserSession();
     localStorage.removeItem("name");
     props.history.push("/");
   };
+  var id = localStorage.getItem("id");
+
   return (
     <div className="contentPageGuest">
       <ToolBar name={localStorage.getItem("name")} />
@@ -26,14 +30,6 @@ function HomeGuest(props) {
               <div className="search-section">
                 <h1>Content SEARCH </h1>
                 {/*  */}
-              </div>
-              <div className="checkButtons">
-                <button className="check-Button" type="button">
-                  Check-In
-                </button>
-                <button className="check-Button" type="button">
-                  Check-Out
-                </button>
               </div>
 
               <button className="findOut-Button" type="button">

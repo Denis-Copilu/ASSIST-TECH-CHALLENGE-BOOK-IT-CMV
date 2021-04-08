@@ -5,7 +5,7 @@ import ToolBar from "../NavBar/Toolbar";
 import NavBar from "../SideMenu/sideMenu";
 
 function HotelRoomAdmin() {
-  const url = "https://23b3efc561d1.ngrok.io";
+  const url = "http://c9a5fecacaa2.ngrok.io";
 
   const { useState } = React;
 
