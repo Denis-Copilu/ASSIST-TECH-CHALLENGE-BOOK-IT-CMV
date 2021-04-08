@@ -9,14 +9,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function HomeGuest(props) {
-  const url = "http://77113eef5af1.ngrok.io";
   // handle click event of logout button
-  const handleLogout = () => {
-    removeUserSession();
-    localStorage.removeItem("name");
-    props.history.push("/");
-  };
-  var id = localStorage.getItem("id");
 
   return (
     <div className="contentPageGuest">
@@ -27,10 +20,7 @@ function HomeGuest(props) {
           <div className="wallpaper">
             <img src={GuestHomePagePhoto} alt="" />
             <div className="wallpaper-content">
-              <div className="search-section">
-                <h1>Content SEARCH </h1>
-                {/*  */}
-              </div>
+              <div className="search-section">{/*  */}</div>
 
               <button className="findOut-Button" type="button">
                 <Link to="/aboutus" className="link-AboutUs">

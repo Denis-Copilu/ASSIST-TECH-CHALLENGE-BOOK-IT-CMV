@@ -12,7 +12,7 @@ import {
 import "./ReservationGuest.css";
 
 function ReservationsGuest() {
-  const url = "http://d322baaeac27.ngrok.io";
+  const url = "http://8c9e55db7a2d.ngrok.io";
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -98,7 +98,7 @@ function ReservationsGuest() {
         .then((resp) => {
           alert("You're reservation have been canceled!");
         })
-        .catch((error) => alert("You're cancel reservation operation failed!"));
+        .catch((error) => alert("You're reservation cancel operation failed!"));
     }
   };
 

@@ -5,14 +5,24 @@ import ToolBar from "../NavBar/Toolbar";
 import NavBar from "../SideMenu/sideMenu";
 
 function HotelRoomAdmin() {
-  const url = "http://d322baaeac27.ngrok.io";
+  const url = "http://8c9e55db7a2d.ngrok.io";
 
   const { useState } = React;
 
   const [columns, setColumns] = useState([
     { title: "RoomNumber", field: "id", editable: "never" },
-    { title: "MaxCapacity", field: "maxCapacity" },
-    { title: "Facilities", field: "facilities" },
+    {
+      title: "MaxCapacity",
+      field: "maxCapacity",
+      validate: (rowData) =>
+        rowData.maxCapacity > 6 ? "Capacity needs to be less than 6" : "",
+    },
+    {
+      title: "Facilities",
+      field: "facilities",
+      validate: (rowData) =>
+        rowData.facilities === "" ? "Facilities cannot be empty" : "",
+    },
     {
       title: "Smoking",
       field: "smoking",
@@ -24,7 +34,14 @@ function HotelRoomAdmin() {
       lookup: { false: "Not allowed", true: "Allowed" },
     },
     { title: "Rating", field: "rating", editable: "never" },
-    { title: "NFCTag", field: "nfcTag" },
+    {
+      title: "NFCTag",
+      field: "nfcTag",
+      validate: (rowData) =>
+        rowData.nfcTag != rowData.id
+          ? "NFC Tag cannot differ from room number"
+          : "",
+    },
     {
       title: "Room type",
       field: "bedsNumber",
@@ -36,17 +53,16 @@ function HotelRoomAdmin() {
       editable: "never",
       lookup: { false: "Not Cleaned", true: "Cleaned" },
     },
-    { title: "Price", field: "price" },
+    {
+      title: "Price",
+      field: "price",
+      validate: (rowData) =>
+        rowData.price < 50 ? "The price needs to be higher than 50 euro" : "",
+    },
   ]);
 
   const editValidation = (input, oldData) => {
-    if (input.nfcTag === oldData.nfcTag) {
-      alert("The NFC tag needs to be different from the existing one");
-    } else if (
-      isNaN(input.maxCapacity) ||
-      isNaN(input.nfcTag) ||
-      isNaN(input.price)
-    ) {
+    if (isNaN(input.maxCapacity) || isNaN(input.nfcTag) || isNaN(input.price)) {
       alert("Your input type is invalid");
     } else if (input.price < 50 || input.price > 5000) {
       alert("Your inserted price should be higher than 50 and less than 5000");
@@ -152,7 +168,7 @@ function HotelRoomAdmin() {
             }}
             options={{
               paging: true,
-              pageSize: 7, // make initial page size
+              pageSize: 6, // make initial page size
               pageSizeOptions: [0],
               headerStyle: {
                 backgroundColor: "#1881c7",
