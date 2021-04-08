@@ -5,48 +5,23 @@ import ToolBar from "../NavBar/Toolbar";
 import NavBar from "../SideMenu/sideMenu";
 
 function AllGuests() {
-  const url = "http://d322baaeac27.ngrok.io";
+  const url = "http://8c9e55db7a2d.ngrok.io";
 
   // handle click event of logout button
 
   const { useState } = React;
 
   const [columns, setColumns] = useState([
-    { title: "User Id", field: "userId", filtering: false },
-    { title: "Start Date", field: "startDate" },
-    { title: "End Date", field: "endDate" },
-    {
-      title: "Status",
-      field: "status",
-      filtering: false,
-      lookup: {
-        new: "New",
-        "check-in": "Checked-in",
-        "check-out": "Checked-out",
-        locked: "Checked-in",
-        unlocked: "Checked-in",
-        "auto check-out": "Auto Checked-out",
-      },
-    },
-    {
-      title: "Canceled",
-      field: "annulled",
-      filtering: false,
-      lookup: { false: "No", true: "Yes" },
-    },
-    { title: "Price", field: "price", filtering: false },
-    { title: "Room Number", field: "roomNumber", filtering: false },
+    { title: "Name", field: "name" },
+    { title: "Email", field: "email" },
+    { title: "Phone", field: "phone" },
   ]);
-  // const getUser = () =>{
-  //   if(    axios.get(url+`/users/id/${data.userId}`===data.userId))
-
-  // }
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
     axios
-      .get(url + "/reservation/list")
+      .get(url + "/user/list")
       .then((resp) => {
         setData(resp.data);
       })
@@ -73,7 +48,6 @@ function AllGuests() {
               paging: true,
               pageSize: 9, // make initial page size
               pageSizeOptions: [0],
-              filtering: true,
               headerStyle: {
                 backgroundColor: "#1881c7",
                 color: "#fff",
